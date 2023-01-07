@@ -10,6 +10,14 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
+        visit new_task_path
+        date = Date.new(2023,01,10)
+        fill_in 'task[title]', with: '初タスク登録'
+        fill_in 'task[content]', with: '少しテストがわかってきた。'
+        fill_in "task[limit]", with: date
+        click_button
+        expect(page).to have_content '初タスク登録'
+        expect(page).to have_content '少しテストがわかってきた。'
       end
     end
   end
@@ -32,6 +40,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
+        task = FactoryBot.create(:task, title: 'show_test')
+        visit tasks_path
+        expect(page).to have_content "show_test"
 
        end
      end
