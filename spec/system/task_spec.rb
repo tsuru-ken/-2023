@@ -26,7 +26,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:second_task, title: 'タイトル2')
 
         visit tasks_path
-        task_list = page.all('.task_row')
+        task_list = all('.task_row')
 
         expect(task_list[0]).to have_content 'タイトル1'
         expect(task_list[1]).to have_content 'タイトル2'
