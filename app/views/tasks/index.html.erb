@@ -13,11 +13,11 @@
   <tr>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
-    <td><%= l task.limit %></td>
+    <td><%= task.limit %></td>
     <td><%= task.status %></td>
     <td><%= task.priority %></td>
-    <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-    <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
+    <td><%= link_to 'タスク詳細', task_path(task.id) %></td>
+    <td><%= link_to 'タスクを編集するする', edit_task_path(task.id) %></td>
     <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } ,class:"btn btn-outline-warning" %></td>
 
   </tr>
