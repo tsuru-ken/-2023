@@ -1,16 +1,31 @@
-<h1>タスク一覧</h1>
+
+
+<%# 特定のViewファイル専用の訳文を簡単に参照している %>
+<h1><%= t('.task_list') %></h1>
 <p><%= notice %></p>
+
+
+<button type="button" class="btn btn-outline-success">
+<%= link_to '終了期限でソートする', tasks_path(limit: "true")%>
+</button>
+
+
+
+
+
 <table>
   <tr>
-    <th>タイトル</th>
-    <th>タスク名</th>
-    <th>終了期限</th>
-    <th>ステータス</th>
-    <th>優先度</th>
+  <th><%= t('.user_name') %></th>
+    <th><%= t('.title') %></th>
+    <th><%= t('.content') %></th>
+    <th><%= t('.limit') %></th>
+    <th><%= t('.status') %></th>
+    <th><%= t('.priority') %></th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr class="task_row" >
+    <td>投稿者の名前</td>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
     <td><%= task.limit %></td>
@@ -19,7 +34,7 @@
     <td><%= link_to 'タスク詳細', task_path(task.id) %></td>
     <td><%= link_to 'タスクを編集するする', edit_task_path(task.id) %></td>
     <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } ,class:"btn btn-outline-warning" %></td>
-
+    <%# <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
   </tr>
 <% end %>
 </table>
