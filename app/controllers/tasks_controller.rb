@@ -4,15 +4,23 @@ class TasksController < ApplicationController
 
   #一覧画面
   def index
-    #全てのタスクから所得する命令
-    # @tasks = Task.order(id: "DESC")
-    if params[:limit]
-      @tasks = Task.sort_limit
-    else
-      @tasks = Task.all
+    @tasks =Task.all
+
+    # 終了期限/優先度ソート機能
+    if params[:sort_limit]
+      @tasks = @tasks.sort_limit
+    elsif params[:sort_priority]
+      @tasks = @tasks.sort_priority
+    end
+
+    if params[:search].present?
+      @tasks = @tasks
+        .search_status(params[:search][:status])
+        .search_title(params[:search][:title])
     end
   end
-  
+
+
 
   #詳細画面
   def show
@@ -62,7 +70,7 @@ class TasksController < ApplicationController
   private
   #StrongParameters
   def task_params
-    params.require(:task).permit(:title, :content,:limit)
+    params.require(:task).permit(:title, :content, :limit, :status, :priority)
   end
   # idをキーとして値を取得するメソッドを追加
   def set_task

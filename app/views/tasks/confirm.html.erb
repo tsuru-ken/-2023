@@ -4,9 +4,11 @@
   <%= form.hidden_field :title %>
   <%= form.hidden_field :content %>
    <%= form.hidden_field :limit %>
+   <%= form.hidden_field :status %>
 
   <p>タイトル:<%= @task.title %></p>
   <p>タスク名:<%= @task.content %></p>
+  <p>ステータス:<%= @task.status %></p>
   <p>終了期限:<%= @task.limit %></p>
 
   <%= form.submit  "登録する" %>

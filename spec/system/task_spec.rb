@@ -37,6 +37,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         #indexの<tr class="task_row" >
         # タスク一覧を配列として取得するため、View側でclassを振っておく
+        sleep(1)
         task_list = all('.task_row')
 
         expect(task_list[0]).to have_content 'タイトル3'
@@ -51,6 +52,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:second_task, title: 'タイトル2', limit: "2023/01/8" )
         task = FactoryBot.create(:third_task, title: 'タイトル3', limit: "2023/01/9" )
         visit tasks_path
+        click_link '終了期限でソートする'
         task_list = all('.task_row')
 
         expect(task_list[0]).to have_content 'タイトル1'
