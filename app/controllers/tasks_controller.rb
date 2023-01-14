@@ -17,10 +17,21 @@ class TasksController < ApplicationController
       @tasks = @tasks
         .search_status(params[:search][:status])
         .search_title(params[:search][:title])
-        .search_label(params[:search][:label_id])
+        # .search_label(params[:search][:label_id])
     end
-
+      # ページネーション
     # @tasks = tasks.page(params[:page]).defalt_order
+
+  #モデル記載
+  # /if params[:search].present?
+        #  if params[:search][:status].present? && params[:search][:title].present?
+          #  @tasks = @tasks.search_status(params[:search][:status]).search_title(params[:search][:title])
+        #  elsif params[:search][:status].present?
+          # @tasks = @tasks.search_status(params[:search][:status])
+        #  elsif params[:search][:title].present?
+          #  @tasks = @tasks.search_title(params[:search][:title])
+        #  end
+      #  end
   end
 
 

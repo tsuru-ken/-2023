@@ -10,7 +10,6 @@ class Task < ApplicationRecord
   # scope検索・ソート機能用
   scope :sort_limit, -> {order(limit: :asc)}
   scope :sort_priority, -> { order(priority: :DESC) }
-
   scope :search_status, ->(status) {
     return if status.blank?
     where(status: status) }
