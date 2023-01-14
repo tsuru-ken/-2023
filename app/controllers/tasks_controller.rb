@@ -20,7 +20,7 @@ class TasksController < ApplicationController
         .search_label(params[:search][:label_id])
     end
 
-    @tasks = tasks.page(params[:page]).defalt_order
+    # @tasks = tasks.page(params[:page]).defalt_order
   end
 
 
