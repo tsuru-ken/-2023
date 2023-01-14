@@ -9,14 +9,16 @@ class Task < ApplicationRecord
 
   # scope検索・ソート機能用
   scope :sort_limit, -> {order(limit: :asc)}
+  scope :sort_priority, -> { order(priority: :DESC) }
+
   scope :search_status, ->(status) {
     return if status.blank?
     where(status: status) }
   scope :search_title, ->(title) {
     return if title.blank?
     where('title LIKE ?',"%#{title}%") }
-  scope :search_label, ->(label) {
-    return if label.blank?
+  # scope :search_label, ->(label) {
+    # return if label.blank?
     # pluckよりselect(副問合せ)を使った方がSQL文が一行で済むので稼働コストが良い
-    where(id: labelTask.where(label_id: label).select(:task_id))}
+    # where(id: labelTask.where(label_id: label).select(:task_id))}
 end

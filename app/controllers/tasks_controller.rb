@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   # before_actionメソッド
-  before_action :set_task, only: %i[show, edit, update, destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   #一覧画面
   def index
@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     # 終了期限/優先度ソート機能
     if params[:sort_limit]
       @tasks = @tasks.sort_limit
-    elsif params[:sort_priority]
+    elsif [:sort_priority]
       @tasks = @tasks.sort_priority
     end
 
