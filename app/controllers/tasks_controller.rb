@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   # before_actionメソッド
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: %i[show, edit, update, destroy]
 
   #一覧画面
   def index
@@ -17,7 +17,10 @@ class TasksController < ApplicationController
       @tasks = @tasks
         .search_status(params[:search][:status])
         .search_title(params[:search][:title])
+        .search_label(params[:search][:label_id])
     end
+
+    @tasks = tasks.page(params[:page]).defalt_order
   end
 
 
@@ -70,7 +73,7 @@ class TasksController < ApplicationController
   private
   #StrongParameters
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status, :priority)
+    params.require(:task).permit(:title, :content, :limit, :status, :priority, :label_ids)
   end
   # idをキーとして値を取得するメソッドを追加
   def set_task

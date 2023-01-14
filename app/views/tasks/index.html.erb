@@ -9,6 +9,8 @@
     <%= form.select :status, Task.statuses.keys, include_blank: "" %>
     <%= form.label t('.title') %>
     <%= form.text_field :title %>
+    <%= form.label t('.label') %>
+    <%= form.select :label_id, Label.pluck(:name, :id), include_blank: "", id: "search_label" %>
   </div>
   <div>
     <%= form.submit t('.search'),id: 'search_task', class: "search-btn" %>

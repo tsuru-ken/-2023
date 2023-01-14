@@ -4,15 +4,19 @@ class Task < ApplicationRecord
 
 
   # enum優先度・ステータス用
-  enum priority: { 低: 0, 中: 1, 高: 2 }
-  enum status: {未着手: 0, 着手中: 1, 完了: 2}
+  enum priority: { low: 0, medium: 1, high: 2 }
+  enum status: { not_started: 0, in_progress: 1, completed: 2 }
 
   # scope検索・ソート機能用
   scope :sort_limit, -> {order(limit: :asc)}
-  scope :search_status, ->(status){
+  scope :search_status, ->(status) {
     return if status.blank?
     where(status: status) }
-  scope :search_title, ->(title){
+  scope :search_title, ->(title) {
     return if title.blank?
     where('title LIKE ?',"%#{title}%") }
+  scope :search_label, ->(label) {
+    return if label.blank?
+    # pluckよりselect(副問合せ)を使った方がSQL文が一行で済むので稼働コストが良い
+    where(id: labelTask.where(label_id: label).select(:task_id))}
 end
