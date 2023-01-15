@@ -1,27 +1,74 @@
-<h1>タスク一覧</h1>
+<%# 特定のViewファイル専用の訳文を簡単に参照している %>
+<h1><%= t('.task_list') %></h1>
 <p><%= notice %></p>
+
+<%= form_with(scope: :search, method: :get, local: true) do |form| %>
+
+  <div class="form-group">
+    <%=form.label  t('.status')%>
+    <%= form.select :status, Task.statuses.keys, include_blank: "" %>
+    <%= form.label t('.title') %>
+    <%= form.text_field :title %>
+    <%# <%= form.label t('.label') %>
+    <%# <%= form.select :label_id, Label.pluck(:name, :id), include_blank: "", id: "search_label" %>
+  </div>
+  <div>
+    <%= form.submit t('.search'),id: 'search_task', class: "search-btn" %>
+  </div>
+
+
+
+<% end %>
+
 <table>
   <tr>
-    <th>タイトル</th>
-    <th>タスク名</th>
-    <th>終了期限</th>
-    <th>ステータス</th>
-    <th>優先度</th>
+  <th><%= t('.user_name') %></th>
+    <th><%= t('.title') %></th>
+    <th><%= t('.content') %></th>
+    <th><%= link_to t('.limit'), sort_limit: true, class: "search-btn"%></th>
+    <th><%= link_to t('.priority'), sort_priority: true, class: "search-btn"%></th>
+    <th><%= t('.status') %></th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr class="task_row" >
+    <td>投稿者の名前</td>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
     <td><%= task.limit %></td>
-    <td><%= task.status %></td>
     <td><%= task.priority %></td>
+    <td><%= task.status %></td>
     <td><%= link_to 'タスク詳細', task_path(task.id) %></td>
     <td><%= link_to 'タスクを編集するする', edit_task_path(task.id) %></td>
     <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } ,class:"btn btn-outline-warning" %></td>
-
   </tr>
 <% end %>
 </table>
 
 <%= link_to '新しくタスクを投稿する', new_task_path %>
+<%= paginate @tasks %>
+
+<style>
+h1{
+  text-align:center;
+}
+th {
+  text-align:center;
+}
+td {
+  text-align:center;
+}
+table{
+  border:solid 1px #c0c0c0;
+}
+.pagination {
+  justify-content: center;
+}
+.form-group{
+  float:left;
+  padding: 0 30px;
+}
+.btn-primary{
+  margin-left:20px
+}
+</style>

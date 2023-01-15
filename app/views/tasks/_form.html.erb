@@ -12,18 +12,35 @@
   <% end %>
 
   <p>投稿内容を記入してください</p>
-  <div class="task_title">
+  <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
-  <div class="task_content">
+  <div class="form-group">
     <%= form.label :content %>
     <%= form.text_field :content %>
   </div>
   </div>
-  <div class="task-limit">
+  <div class="form-group">
     <%= form.label :limit,"期日" %>
     <%= form.date_field :limit %>
+  </div>
+  <div class="form-group">
+    <%= form.label :status,"ステータス" %>
+    <%= form.select :status, Task.statuses.keys, include_blank: "", class: "form-control"  %>
+  </div>
+  <div class="form-group">
+    <%= form.label :priority,"優先度" %>
+    <%= form.select :priority, Task.priorities.keys, include_blank: "" %>
+  </div>
+
+
+  <div>
+    <%# <%= form.label :label_name %><br>
+    <%# <% @labels.each do |label| %>
+      <%# <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], class: 'w' %>
+      <%# <%= label.name  %>
+    <%# <% end %>
   </div>
 
 
@@ -31,3 +48,5 @@
 <% end %>
 
 <%= link_to "タスク一覧画面にもどる", tasks_path %>
+
+<style>

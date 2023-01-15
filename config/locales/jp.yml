@@ -6,6 +6,36 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  tasks:
+    form:
+      update: 更新
+      errors: エラーがあります
+    index:
+      title: タスク名
+      content: タスク詳細
+      limit: 終了期限
+      show: 詳細
+      edit: 編集
+      destroy: 削除
+      new: 新規作成
+      confirm: 本当に削除しますか？
+      head: タスク投稿
+      user_name: 投稿者
+      status: ステータス
+      priority: 優先度
+      task_list: タスク一覧
+      search: 検索
+    show:
+      list: 一覧
+      title: タスク名
+      content: タスク詳細
+    edit:
+      task_list: タスク一覧
+      content: 詳細
+      head: ポストの編集
+    new:
+      list: 一覧
+      new_form: 新規タスク投稿
   date:
     abbr_day_names:
     - 日
