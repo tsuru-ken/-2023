@@ -21,9 +21,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         sleep(1)
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'タスクネーム３'
+        expect(task_list[0]).to have_content 'タスクネーム１'
         expect(task_list[1]).to have_content 'タスクネーム２'
-        expect(task_list[2]).to have_content 'タスクネーム１'
+        expect(task_list[2]).to have_content 'タスクネーム３'
       end
     end
 
@@ -36,7 +36,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         # visit tasks_path
         # click_link 'limit'
         # task_list = all('.task_row')
-
         # expect(task_list[0]).to have_content 'タイトル1'
         # expect(task_list[1]).to have_content 'タイトル2'
         # expect(task_list[2]).to have_content 'タイトル3'
