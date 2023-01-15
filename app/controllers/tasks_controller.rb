@@ -20,7 +20,7 @@ class TasksController < ApplicationController
         # .search_label(params[:search][:label_id])
     end
       # ページネーション
-    @tasks = tasks.page(params[:page]).defalt_order
+      @tasks = Task.order(created_at: :desc).page(params[:page])
 
   #モデル記載
   # /if params[:search].present?
