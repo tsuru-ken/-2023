@@ -8,6 +8,7 @@ class Task < ApplicationRecord
   enum status: { not_started: 0, in_progress: 1, completed: 2 }
 
   # scope検索・ソート機能用
+  scope :default_order, -> { order(created_at: :DESC) }
   scope :sort_limit, -> {order(limit: :asc)}
   scope :sort_priority, -> { order(priority: :DESC) }
   scope :search_status, ->(status) {
