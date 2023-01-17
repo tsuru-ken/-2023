@@ -1,10 +1,10 @@
 User.create!(
-  email: "test@test.com",
-  name: "テスト太郎",
+  email: "takeshi@takeshi.com",
+  name: "たけし太郎",
   password: "123456",
   admin: true)
-  User.create!(
+
+User.create!(
   email: "task@task.com",
   name: "タスク太郎",
-  password: "123456",
-  admin: false)
+  password: "123456")

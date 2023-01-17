@@ -40,3 +40,6 @@ gem 'enum_help'
 
 gem 'kaminari'
 gem 'bcrypt'
+gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
