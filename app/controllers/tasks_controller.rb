@@ -1,12 +1,16 @@
 class TasksController < ApplicationController
   # before_actionメソッド
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  skip_before_action :login_required, only: [:new, :create]
+  # skip_before_action :logout_required
+  before_action :correct_user, only: [:show, :edit]
 
   #一覧画面
   def index
-    @tasks =Task.all
 
-    # 終了期限/優先度ソート機能
+    @tasks = current_user.tasks
+
+
     if params[:sort_limit]
       @tasks = @tasks.sort_limit
     elsif [:sort_priority]
@@ -17,21 +21,8 @@ class TasksController < ApplicationController
       @tasks = @tasks
         .search_status(params[:search][:status])
         .search_title(params[:search][:title])
-        # .search_label(params[:search][:label_id])
     end
-      # ページネーション
-      @tasks = Task.order(created_at: :desc).page(params[:page])
-
-  #モデル記載
-  # /if params[:search].present?
-        #  if params[:search][:status].present? && params[:search][:title].present?
-          #  @tasks = @tasks.search_status(params[:search][:status]).search_title(params[:search][:title])
-        #  elsif params[:search][:status].present?
-          # @tasks = @tasks.search_status(params[:search][:status])
-        #  elsif params[:search][:title].present?
-          #  @tasks = @tasks.search_title(params[:search][:title])
-        #  end
-      #  end
+    @tasks = @tasks.page(params[:page])
   end
 
 
@@ -46,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else
@@ -75,7 +66,7 @@ class TasksController < ApplicationController
   end
   #確認
   def confirm
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     render :new if @task.invalid?
   end
 
@@ -91,6 +82,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-
-
+  def correct_user
+    user_id = Task.find(params[:id]).user_id
+    redirect_to tasks_path, notice: User.human_attribute_name(:correct_user)
+    unless current_user?(user_id)
+    end
+  end
 end

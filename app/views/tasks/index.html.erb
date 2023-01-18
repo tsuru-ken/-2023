@@ -15,14 +15,11 @@
   <div>
     <%= form.submit t('.search'),id: 'search_task', class: "search-btn" %>
   </div>
-
-
-
 <% end %>
 
 <table>
   <tr>
-  <th><%= t('.user_name') %></th>
+    <th><%= t('.user_name') %></th>
     <th><%= t('.title') %></th>
     <th><%= t('.content') %></th>
     <th><%= link_to t('.limit'), sort_limit: true, class: "search-btn"%></th>
@@ -32,7 +29,7 @@
 
 <% @tasks.each do |task| %>
   <tr class="task_row" >
-    <td>投稿者の名前</td>
+    <td><%= task.user.name %></td>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
     <td><%= task.limit %></td>
@@ -51,6 +48,7 @@
 <style>
 h1{
   text-align:center;
+  color:pink;
 }
 th {
   text-align:center;
@@ -60,6 +58,7 @@ td {
 }
 table{
   border:solid 1px #c0c0c0;
+  background-color: pink;
 }
 .pagination {
   justify-content: center;
@@ -71,4 +70,7 @@ table{
 .btn-primary{
   margin-left:20px
 }
+
+
+
 </style>
