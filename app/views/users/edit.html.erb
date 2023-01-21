@@ -24,7 +24,7 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
-  <%= f.submit "Create my account" %>
+  <%= f.submit id: 'update-user' %>
 <% end %>
 
 <%= link_to "タスク一覧に戻る", user_path(current_user.id) ,id: 'back' %>
