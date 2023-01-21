@@ -33,7 +33,7 @@
 
   <div class="checkbox">
     <%= f.label :admin, t('.admin')%><br>
-    <%= f.check_box :admin, {}, true, false %>
+    <%= f.select :admin, ["true","false"], {} %>   true:付与、false:付与しない
   </div>
 
   <div >
