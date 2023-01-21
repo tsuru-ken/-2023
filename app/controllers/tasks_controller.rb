@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   skip_before_action :login_required, only: [:new, :create]
   # skip_before_action :logout_required
-  before_action :correct_user, only: [:show, :edit]
+  # before_action :correct_user, only: [:show, :edit]
 
   #一覧画面
   def index
@@ -84,10 +84,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def correct_user
-    user_id = Task.find(params[:id]).user_id
-    redirect_to tasks_path, notice: User.human_attribute_name(:correct_user)
-    unless current_user?(user_id)
-    end
-  end
+  # def correct_user
+  #   user_id = Task.find(params[:id]).user_id
+  #   redirect_to tasks_path, notice: User.human_attribute_name(:correct_user)
+  #   unless current_user?(user_id)
+  #   end
+  # end
 end
