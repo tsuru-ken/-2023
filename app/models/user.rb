@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :tasks
+  # Userが削除された場合に、関連付けられているタスクも削除(dependent: :destroy)される
+  has_many :tasks, dependent: :destroy
 
   validates :name,  presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 },uniqueness: true,

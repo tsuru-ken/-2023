@@ -1,4 +1,4 @@
-<h1><%= t('.show_user_page') %></h1>
+<h1><%= @user.name %>さんのタスク一覧</h1>
 
 <p>
   <strong><%= t('.name') %>:</strong>
@@ -28,19 +28,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @tasks.each do |task| %>
+    <% @user.tasks.each do |task| %>
       <tr>
-        <td><%= @task.title %></td>
-        <td><%= @task.content %></td>
-        <td><%= @task.limit %></td>
-        <td><%= @task.priority %></td>
-        <td><%= @task.status %></td>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.limit %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
       <tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.back'),admin_user_path ,id: 'back' %>
+<%= link_to '戻る', admin_users_path%>
 
 
 

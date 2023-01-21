@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only:  [:show, :edit, :update, :destroy]
+  before_action :not_admin
 
   def index
     @users = User.all
@@ -12,7 +13,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_user_path
+      redirect_to admin_user_path,notice: User.human_attribute_name(:user_created)
     else
       render :new
     end
@@ -25,24 +26,33 @@ class Admin::UsersController < ApplicationController
   def edit
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to admin_user_path,notice: User.human_attribute_name(:user_updated)
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    session.delete(:user_id)
-    flash[:notice] = 'ログアウトしました'
-    redirect_to new_session_path
+    @user.destroy
+    redirect_to admin_users_path, notice: User.human_attribute_name(:user_deleted)
   end
 
   private
   def set_user
     @user = User.find(params[:id])
-    unless @user
-      flash[:alert] = "User not found."
-      redirect_to admin_users_path and return
-    end
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation,:admin)
+    params.require(:user).permit(:name, :email, :password,:password_confirmation,:admin)
+  end
+
+  def not_admin
+    unless current_user.admin?
+      redirect_to tasks_path
+      flash[:notice] = "管理者以外はアクセスできません"
+    end
   end
 
 

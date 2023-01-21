@@ -10,18 +10,20 @@ class TasksController < ApplicationController
 
     @tasks = current_user.tasks
 
-
+    # 終了期限とソート機能
     if params[:sort_limit]
       @tasks = @tasks.sort_limit
     elsif [:sort_priority]
       @tasks = @tasks.sort_priority
     end
-
+    # 検索
     if params[:search].present?
       @tasks = @tasks
         .search_status(params[:search][:status])
         .search_title(params[:search][:title])
     end
+
+    # ページネーション
     @tasks = @tasks.page(params[:page])
   end
 

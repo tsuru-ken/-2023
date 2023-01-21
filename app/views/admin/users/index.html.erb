@@ -1,12 +1,16 @@
 <h1>管理者画面</h1>
 
+<%= link_to 'ユーザーを登録する', new_admin_user_path, class: 'btn btn-primary mb-3'%>
 <table>
   <thead>
     <tr>
-      <th><%= t('.name') %></th>
-      <th><%= t('.email') %></th>
-      <th><%= t('.admin') %></th>
-      <th><%= t('.tasks_number') %></th>
+      <th>ユーザー名</th>
+      <th>メールアドレス</th>
+      <th>管理権限</th>
+      <th>タスク数</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
     </th>
   </thead>
 
@@ -21,10 +25,21 @@
           <td><%= "なし" %></td>
         <% end %>
         <td><%= user.tasks.count %></td>
-        <td><%= link_to t('.show_user'), admin_user_path(user) ,id: "show-user", class: "show-user btn btn-primary" %></td>
-        <td><%= link_to t('.edit_user'), edit_admin_user_path(user),class: "edit-user btn btn-primary" %></td>
-        <td><%= link_to t('.destroy_user'), admin_user_path(user), method: :delete, data: { confirm: t('.are_you_sure?') }, class: "destroy-user btn btn-danger" %></td>
+        <td><%= link_to '詳細', admin_user_path(user), class: "btn btn-outline-primary btn-sm" %></td>
+        <td><%= link_to '編集', edit_admin_user_path(user), class: "btn btn-outline-success btn-sm" %></td>
+        <td><%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '削除してよろしいですか？' }, class: "btn btn-outline-danger btn-sm" %></td>
       </tr>
     <% end%>
   </tbody>
 </table>
+<style>
+h1{
+  text-align:center;
+}
+td{
+  text-align:center;
+}
+th{
+  text-align:center;
+}
+</style>
