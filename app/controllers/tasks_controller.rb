@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   #一覧画面
   def index
 
-    @tasks = current_user.tasks.default_order
+    @tasks = current_user.tasks
 
     # 終了期限とソート機能
     if params[:sort_limit]
