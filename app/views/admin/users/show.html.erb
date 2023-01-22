@@ -1,0 +1,46 @@
+<h1><%= @user.name %>さんのタスク一覧</h1>
+
+<p>
+  <strong><%= t('.name') %>:</strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong><%= t('.email') %>:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong><%= t('.admin') %>:</strong>
+  <%= @user.admin == true %>
+    <% if @user.admin == true %>
+      <%= "あり" %>
+    <% else %>
+      <%= "なし"%>
+    <% end%>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th><%= t('title') %></th>
+      <th><%= t('content') %></th>
+      <th><%= t('limit') %></th>
+      <th><%= t('priority') %></th>
+      <th><%= t('status') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.limit %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.status %></td>
+      <tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '戻る', admin_users_path%>
+
+
+
