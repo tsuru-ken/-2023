@@ -43,3 +43,8 @@ gem 'enum_help'
 gem 'kaminari'
 gem 'bcrypt'
 
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+
+

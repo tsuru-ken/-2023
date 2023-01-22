@@ -285,6 +285,9 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.2)
+  net-imap
+  net-pop
+  net-smtp
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 4.0.0)
