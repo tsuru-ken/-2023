@@ -5,6 +5,10 @@
 <p>優先順位: <%= @task.priority %></p>
 <p>ステータス: <%= @task.status %></p>
 
+<p>タグ：<% @task.labels.pluck(:label_name).each do |label| %>
+          <label class="btn btn-secondary"><%= label %></label>
+        <% end %>
+</p>
 
 
 <%=link_to "タスク一覧に戻る",tasks_path%>

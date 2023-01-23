@@ -3,14 +3,14 @@ class Task < ApplicationRecord
   # Taskクラスが１つのUserクラスに所属している
   # TaskLクラスとUserクラスを紐付けできる
   belongs_to :user
+  # Taskが複数のTaskLabelクラスに属している。
+  # Taskが削除された時にそれに紐づく、TaskLabelも削除される（dependent: :destroy）
+  has_many :task_labels, dependent: :destroy
 
   # Taskが複数のLabelクラスに属している。
   # 中間テーブルであるtask_labelsを経由して、TaskクラスとLabelクラスを紐付けできる。
   has_many :labels, through: :task_labels
 
-  # Taskが複数のTaskLabelクラスに属している。
-  # Taskが削除された時にそれに紐づく、TaskLabelも削除される（dependent: :destroy）
-  has_many :task_labels, dependent: :destroy
 
   validates :title, presence: true,length:{in:1..30}
   validates :content, presence: true,length:{in:1..140}
@@ -33,4 +33,7 @@ class Task < ApplicationRecord
     return if title.blank?
     where('title LIKE ?',"%#{title}%") }
 
+  scope :search_label, ->(label) {
+    return if label.blank?
+    where(id: LabelTask.where(label_id: label).select(:task_id))}
 end
