@@ -34,7 +34,10 @@
     <th><%= link_to t('.limit'), sort_limit: true, class: "search-btn"%></th>
     <th><%= link_to t('.priority'), sort_priority: true, class: "search-btn"%></th>
     <th><%= t('.status') %></th>
-    <th> タグ </th>
+    <th>詳細</th>
+    <th>編集</th>
+    <th>削除</th>
+    <th>ラベル</th>
   </tr>
 
   <% @tasks.each do |task| %>
@@ -45,12 +48,14 @@
       <td><%= task.limit %></td>
       <td><%= task.priority %></td>
       <td><%= task.status %></td>
-      <td><% task.labels.each do |label| %></td>
-      <td> <%= label.label_name %></td>
-      <% end %>
       <td><%= link_to '詳細を確認する', task_path(task.id),class:"btn btn-outline-success" %></td>
       <td><%= link_to 'タスクを編集する', edit_task_path(task.id) %></td>
       <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } ,class:"btn btn-outline-warning" %></td>
+      <% task.labels.each do |label| %>
+      <td>
+        <%= label.label_name %>
+      </td>
+    <% end %>
     </tr>
   <% end %>
 </table>
