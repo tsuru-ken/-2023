@@ -48,8 +48,13 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = current_user.id
 
+    # taskキーの中にある、label_idsキーの値を所得。present?でオブジェクトがnilかどうか確認
     if params[:task][:label_ids].present?
-    @task.labels << Label.find(params[:task][:label_ids])
+      binding.pry
+      # @taskはTaskモデルのインスタンスである。また、<<で配列に要素を追加
+      # paramsハッシュからtaskキーの中にあるlabel_idsキーの値を所得して,Labelモデルから対応するレコードを検索
+      # @taskにparamsハッシュから所得した、label_idsの値に対応するモデルのレコードを配列に追加。
+      @task.labels << Label.find(params[:task][:label_ids])
     end
     # if params[:back]
     #   render :new
