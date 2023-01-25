@@ -42,10 +42,11 @@ class Task < ApplicationRecord
     where('title LIKE ?',"%#{title}%") }
 
   # 引数として渡した、'label'を使用して、Taskモデルのlabelと一致するTaskを検索
-  scope :search_label, ->(label) {
+  scope :search_label, ->(label_id) {
     # ’label'が空白の場合、scopeから抜ける
-    return if label.blank?
+    # binding.pry
+    return if label_id.blank?
     # binding.pry
     # 中間テーブル（task_label）を使用して、Label_idが渡された、’Label’に一致するTask_idを所得、それを使用して、Taskモデルから対応するレコードを検索
-    where(id: task_label.where(label_id: label).select(:task_id))}
+    where(id: TaskLabel.where(label_id: label_id).pluck(:task_id))}
 end
