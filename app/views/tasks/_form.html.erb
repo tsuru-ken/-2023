@@ -1,4 +1,7 @@
-<%= form_with(model: @task, local: true ,url: choose_new_or_edit) do |form| %>
+<%# <%= form_with(model: @task, local: true ,url: choose_new_or_edit) do |form| %> %>
+
+<%# 1/25海外メンターコード %>
+<%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <h2><%= @task.errors.count %>件のエラーがあります。</h2>
@@ -35,13 +38,27 @@
   </div>
 
 
-  <div>
-    <%# <%= form.label :label_name %><br>
-    <%# <% @labels.each do |label| %>
-      <%# <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], class: 'w' %>
-      <%# <%= label.name  %>
-    <%# <% end %>
-  </div>
+  <%# <div class="form-group"> %>
+    <%# <%= form.label :label_name %><br> %>
+    <%# <%= form.label :label_name,"タグ" %> %>
+
+    <%# <% @labels.each do |label| %> %>
+    <%# <% Label.all.each do |label| %> %>
+      <%# <%= form.collection_check_boxes( :label_ids, Label.all, :id, :label_name,{}, {multiple: true} )%> %>
+      <%# <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], class: 'w' %> %>
+      <%# <%= label.label_name  %> %>
+    <%# <% end %> %>
+  <%# </div> %>
+
+  <div class="form-group">
+  <% Label.all.each do |label|%>
+    <%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false}, label[:id] %>
+    <%= label.label_name %>
+  <% end %>
+</div>
+
+
+
 
 
   <%= form.submit %>

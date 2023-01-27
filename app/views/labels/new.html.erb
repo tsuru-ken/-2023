@@ -1,0 +1,6 @@
+<h3>ラベル新規作成</h3>
+<%= form_with(model: @label, local: true) do |f| %>  
+  <%= f.label :label_name %>
+  <%= f.text_field :label_name %>
+  <%= f.submit "Create label" %>
+<% end %>
